@@ -1,0 +1,18 @@
+name: cdc_project
+services:
+  app:
+    image: django-docker:latest
+    container_name: cdc_project
+    environment:
+      - PROJECT_NAME=cdc_project
+      - PIPELINE=development
+      - SECRET_KEY=your_value
+      - DB_NAME=.
+      - DB_USER_NM=.
+      - DB_USER_PW=.
+      - DB_IP=0.0.0.0
+      - DB_PORT=5432
+    ports:
+      - "8080:8000"
+    volumes:
+      - /home/addohm/cdc_project:/project

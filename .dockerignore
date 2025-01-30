@@ -1,0 +1,5 @@
+.env
+env/
+Dockerfile
+docker-compose.yaml
+db.sqlite3
