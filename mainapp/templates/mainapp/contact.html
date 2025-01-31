@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block maincontent %}
+
+  <!-- Main Content -->
+  <main class="container mt-4">
+    <h1 class="text-center mb-4">Contact Us</h1>
+    <p class="text-center mb-5">Have questions or want to book an adventure? Reach out to us!</p>
+
+    <!-- Contact Form -->
+    <form class="row g-3" action="send_email.php" method="POST">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="col-12">
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </div>
+    </form>
+  </main>
+
+  {% endblock %}

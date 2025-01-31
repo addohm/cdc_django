@@ -5,7 +5,7 @@ import mimetypes
 from . import get_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-6cgld=9(q4u)r3j7a7mrm*x*#^-%hyn2*6ak$7&h^dgdb-#m)m
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-INTERNAL_IPS = ['10.0.0.250']
+INTERNAL_IPS = ['10.0.0.250', '10.0.0.3']
 
 # Application definition
 
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mainapp'
 ]
 
 MIDDLEWARE = [
@@ -107,15 +108,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'staticfiles/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "staticfiles",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Only enable the toolbar when we're in debug mode and we're
 # not running tests. Django will change DEBUG to be False for
 # tests, so we can't rely on DEBUG alone.
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 ENABLE_DEBUG_TOOLBAR = DEBUG and "test" not in sys.argv
 if ENABLE_DEBUG_TOOLBAR:
     SECURE_CROSS_ORIGIN_OPENER_POLICY = None

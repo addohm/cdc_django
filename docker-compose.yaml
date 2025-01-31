@@ -6,13 +6,13 @@ services:
     environment:
       - PROJECT_NAME=cdc_project
       - PIPELINE=development
-      - SECRET_KEY=your_value
-      - DB_NAME=.
+      - SECRET_KEY=47kllzz2aedfp11$32bvh&2sq2(!-5%s!*j1^yu8u+j9@uq4o0
+      - DB_NAME=cdc_project
       - DB_USER_NM=.
       - DB_USER_PW=.
-      - DB_IP=0.0.0.0
-      - DB_PORT=5432
+      - DB_IP=.
+      - DB_PORT=.
     ports:
-      - "8080:8000"
+      - "25080:8000"
     volumes:
       - /home/addohm/cdc_project:/project
