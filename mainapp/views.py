@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import CarouselImage, Staff, Product, DiveSite, Social
+from .models import CarouselImage, Staff, Product, DiveSite, Social, Contact
+from .forms import ContactForm
 
 
 class IndexView(generic.TemplateView):
@@ -31,10 +32,19 @@ class SocialsView(generic.TemplateView):
                    'socials': socials,
                    'viewname': 'socials'}
 
-class ContactView(generic.TemplateView):
-    template_name = "mainapp/contact.html"
+class ContactFormCreateView(generic.edit.CreateView):
+    form_class = ContactForm
+    template_name = 'mainapp/contact.html'
+    success_url = '/sent/'
     extra_context={'background_style': 'otherBody',
-                   'viewname': 'contact'}
+                'viewname': 'contact'}
+    
+class SentView(generic.TemplateView):
+    template_name = "mainapp/message_sent.html"
+    sent = Contact.objects.all()
+    extra_context={'background_style': 'otherBody',
+                   'sent': sent,
+                   'viewname': 'sent'}
 
 class ProductsView(generic.TemplateView):
     template_name = "mainapp/products.html"

@@ -7,7 +7,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONBUFFERED=1
 
 # Define an environment variable for the web service's port, commonly used in cloud services
-ENV APPPORT 8000
+ENV APP_PORT 8000
+
+# Define an environment variable for the project name
+ENV cdc_project = PROJECT_NAME
 
 # Set the working directory within the container to /app for any subsequent commands
 WORKDIR /project
@@ -33,9 +36,9 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # # Set the command to run our web service using Gunicorn, binding it to 0.0.0.0 and the PORT environment variable
-CMD gunicorn ${PROJECT_NAME}.wsgi:application --bind 0.0.0.0:"${APPPORT}"
+CMD gunicorn ${PROJECT_NAME}.wsgi:application --bind 0.0.0.0:"${APP_PORT}"
 
 # Inform Docker that the container listens on the specified network port at runtime
-EXPOSE ${APPPORT}
+EXPOSE ${APP_PORT}
 
 # docker build -t django-docker:latest .

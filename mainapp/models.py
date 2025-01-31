@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 from cdc_project.settings import STATIC_URL
 
 images_url = STATIC_URL + 'images/'
@@ -45,3 +46,20 @@ class Social(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Contact(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Name')
+    email = models.EmailField(verbose_name='E-Mail')
+    phone = models.CharField(max_length=15, verbose_name='Phone')
+    subject = models.CharField(max_length=255, verbose_name='Subject')
+    message =models.TextField(verbose_name='Message')
+    when_sent = models.DateTimeField(default=now, editable=False)
+    replied = models.BooleanField(default=False)
+    when_replied = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Message'
+        verbose_name_plural = 'Messages'
