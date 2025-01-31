@@ -1,4 +1,2 @@
 .env
 env/
-staticfiles/images/carousel/*
-db.sqlite3
