@@ -1,6 +1,8 @@
 from django import forms
+from django.core.mail import send_mail
 from django.core.validators import EmailValidator
-
+from django.db import transaction
+from decouple import config
 from .models import Contact
 
 
@@ -16,9 +18,20 @@ class ContactForm(forms.ModelForm):
             'subject': forms.TextInput(attrs={'class': 'form-control'}),
             'message': forms.Textarea(attrs={'class': 'form-control'}),
         }
-  
-    # name = forms.CharField(max_length=100, required=True)
-    # email = forms.CharField(validators=[EmailValidator()], required=True)
-    # phone = forms.CharField(max_length=15, required=True)
-    # subject = forms.CharField(max_length=100, required=True)
-    # message = forms.CharField(widget=forms.Textarea, required=True)
+
+    def save(self):
+        instance = super(ContactForm, self).save()
+        print(instance.subject)
+
+        @transaction.on_commit
+        def contact_sendemail():
+            send_mail(
+                instance.subject,
+                instance.message,
+                config("EMAIL_HOST_USER"),
+                [instance.email],
+                fail_silently=False,
+            )
+            print("Email sent, maybe?")
+        print("Form saved, check email.")
+        return instance

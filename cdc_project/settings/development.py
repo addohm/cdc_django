@@ -10,7 +10,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(',')])
 INTERNAL_IPS = config("INTERNAL_IP", cast=lambda v: [s.strip() for s in v.split(',')])
 
 INSTALLED_APPS = [
